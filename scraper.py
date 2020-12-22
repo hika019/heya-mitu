@@ -4,10 +4,9 @@ import time
 import pprint
 from bs4 import BeautifulSoup
 
-#url = "https://tora-net.sti.chubu.ac.jp/syllabusv3/slbssbdr.do?value(risyunen)=2020&value(semekikn)=1&value(kougicd)=13525&value(crclumcd)=01011800002019"
+#url = "https://tora-net.sti.chubu.ac.jp/syllabusv3/slbssbdr.do?value(risyunen)=2020&value(semekikn)=1&value(kougicd)={}&value(crclumcd)=01011800002019"
 #url = "https://tora-net.sti.chubu.ac.jp/syllabusv3/slbssbdr.do?value(risyunen)=2020&value(semekikn)=1&value(kougicd)=25273&value(crclumcd)=01011800002019N"
-url_fowrd = "https://tora-net.sti.chubu.ac.jp/syllabusv3/slbssbdr.do?value(risyunen)=2020&value(semekikn)=1&value(kougicd)="
-url_back = "&value(crclumcd)=01011800002019N"
+base_url = "https://tora-net.sti.chubu.ac.jp/syllabusv3/slbssbdr.do?value(risyunen)=2020&value(semekikn)=1&value(kougicd)={}&value(crclumcd)=01011800002019N"
 
 def scraper(url):
     html = requests.get(url)
@@ -36,8 +35,7 @@ lists = []
 url_id = 25273
 
 for i in range(5):
-    url = url_fowrd + str(url_id + i) + url_back
-    
+    url = base_url.format(int(url_id + i))
     print(url)
     
     data = scraper(url)
